@@ -7,14 +7,14 @@ import type Strategy from "./Strategy.js";
  */
 export default interface Analysis {
 	/** The languages in which the analysis is available. Always an ISO 639-1 language code. */
-	languages: string[];
+	languages?: string[];
 
 	/** The names of moves that the Pokémon can learn. Always matches a `name` value of a `Move`. */
-	learnset: string[];
+	learnset?: string[];
 
 	/** Strategy guides for the Pokémon. */
-	strategies: Strategy[];
+	strategies?: Strategy[];
 
 	/** Strategy guides for the Pokémon's forms. */
-	formeStrategies: FormStrategy[];
+	formeStrategies?: FormStrategy[];
 }

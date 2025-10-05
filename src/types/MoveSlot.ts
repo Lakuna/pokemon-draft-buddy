@@ -7,5 +7,5 @@ export default interface MoveSlot {
 	move: string;
 
 	/** The type of the move in the move slot. Always matches a `name` value of a `Type` or is `null`. */
-	type: unknown;
+	type: string | null;
 }

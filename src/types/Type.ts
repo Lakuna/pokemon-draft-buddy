@@ -1,12 +1,10 @@
-import type TypeAtkEffective from "./TypeAtkEffective.js";
-
 /**
  * A Pokémon type.
  * @public
  */
 export default interface Type {
 	/** Type attack effectiveness entries. */
-	atk_effectives: TypeAtkEffective[];
+	atk_effectives: [string, number][];
 
 	/** A human-readable description of the type. */
 	description: string;

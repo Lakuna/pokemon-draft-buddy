@@ -10,7 +10,7 @@ export default interface Nature {
 	def: number;
 
 	/** The generations in which the nature exists. Always matches a `shorthand` value of a `Generation`. */
-	genfamily: string;
+	genfamily: string[];
 
 	/** The health point multiplier of the nature. */
 	hp: number;
