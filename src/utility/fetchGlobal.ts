@@ -26,7 +26,11 @@ export default async function fetchGlobal(
 			}
 		}
 
-		return await page.evaluate(name);
+		try {
+			return await page.evaluate(name);
+		} catch {
+			return void 0;
+		}
 	} finally {
 		await browser.close();
 	}

@@ -65,16 +65,12 @@ for (const [i, pokemon] of all.entries()) {
 	// Parse the comments.
 	// eslint-disable-next-line no-await-in-loop
 	const comments = await htmlToPlaintext(strategy.comments);
+	let mode = "";
 	const commonRoles: Record<string, string> = {};
-	let inCommonRoles = false;
 	for (const line of comments.split("\n")) {
 		const cleanLine = line.toLowerCase().trim();
-		if (cleanLine === "common roles") {
-			inCommonRoles = true;
-			continue;
-		}
-
 		if (
+			cleanLine === "common roles" ||
 			cleanLine === "common moves" ||
 			cleanLine === "niche moves" ||
 			cleanLine === "common items" ||
@@ -83,17 +79,18 @@ for (const [i, pokemon] of all.entries()) {
 			cleanLine === "draft strategy" ||
 			cleanLine === "checks and counters"
 		) {
-			inCommonRoles = false;
+			mode = cleanLine;
 			continue;
 		}
 
-		if (!inCommonRoles) {
+		if (mode === "common roles") {
+			commonRoles[line.substring(0, line.indexOf(":"))] = line
+				.substring(line.indexOf(":") + 1)
+				.trim();
 			continue;
 		}
 
-		commonRoles[line.substring(0, line.indexOf(":"))] = line
-			.substring(line.indexOf(":") + 1)
-			.trim();
+		// TODO
 	}
 
 	out.push({
