@@ -224,6 +224,5 @@ const dexSettingsSchema = object({
 export default function isDexSettings(
 	dexSettings: unknown
 ): dexSettings is DexSettings {
-	dexSettingsSchema.parse(dexSettings);
-	return true;
+	return dexSettingsSchema.safeParse(dexSettings).success;
 }
