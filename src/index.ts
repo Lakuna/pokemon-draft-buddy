@@ -39,11 +39,13 @@ for (const [i, pokemon] of all.entries()) {
 	// eslint-disable-next-line no-await-in-loop
 	const analysis = await fetchAnalysis(generation, pokemon);
 	if (!analysis?.strategies) {
+		out.push({ error: "No strategies.", name: pokemon.name });
 		continue;
 	}
 
 	const strategy = analysis.strategies.find(({ format }) => format === "Draft");
 	if (!strategy) {
+		out.push({ error: "No draft strategy.", name: pokemon.name });
 		continue;
 	}
 
@@ -94,17 +96,25 @@ for (const [i, pokemon] of all.entries()) {
 	}
 
 	out.push({
+		abilities: pokemon.abilities,
+		attack: pokemon.atk,
 		commonRoles,
+		defense: pokemon.def,
 		draftOrder: {
 			round: draftOrder,
 			text: draftOrderText
 		},
+		health: pokemon.hp,
 		name: pokemon.name,
 		priceRange: {
 			max: priceRangeMax,
 			min: priceRangeMin,
 			text: priceRangeText
-		}
+		},
+		specialAttack: pokemon.spa,
+		specialDefense: pokemon.spd,
+		speed: pokemon.spe,
+		types: pokemon.types
 	});
 }
 

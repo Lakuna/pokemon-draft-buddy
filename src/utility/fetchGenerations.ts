@@ -9,7 +9,8 @@ export default async function fetchGenerations(): Promise<
 > {
 	const dexSettings = await fetchGlobal(
 		"https://www.smogon.com/dex/",
-		"dexSettings"
+		"dexSettings",
+		true
 	);
 	if (!isDexSettings(dexSettings)) {
 		throw new Error("Invalid data.");
