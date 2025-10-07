@@ -27,7 +27,8 @@ if (!basics) {
 console.log(`Got basics with ${basics.pokemon.length.toString()} Pokémon.`);
 
 const all = basics.pokemon.filter(
-	({ isNonstandard }) => isNonstandard !== IsNonstandard.CAP
+	({ isNonstandard, oob }) =>
+		isNonstandard !== IsNonstandard.CAP && oob !== null
 );
 const out = [];
 for (const [i, pokemon] of all.entries()) {
@@ -69,7 +70,7 @@ for (const [i, pokemon] of all.entries()) {
 	const comments = await htmlToPlaintext(strategy.comments);
 	let mode = "";
 	const commonRoles: Record<string, string> = {};
-	for (const line of comments.split("\n")) {
+	for (const line of [...overview.split("\n"), ...comments.split("\n")]) {
 		const cleanLine = line.toLowerCase().trim();
 		if (
 			cleanLine === "common roles" ||
